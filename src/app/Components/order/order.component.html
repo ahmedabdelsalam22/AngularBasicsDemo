@@ -1,4 +1,12 @@
-<p class="mb-5">Order Page</p>
+<div class="mb-3 mt-3">
+    <label>Category</label>
+    <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatId">
+        <option value="0" selected>All</option>
+        <option *ngFor="let item of categoryList" value="{{item.id}}">{{item.name}}</option>
+    </select>
+</div>
+<p>{{selectedCatId}}</p>
+
 <hr>
-<app-products></app-products>
+<app-products [recievedSelectedCatId]="selectedCatId"></app-products>
 <hr>

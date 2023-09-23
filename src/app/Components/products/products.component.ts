@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { ICategory } from 'src/app/Models/icategory';
+import { Component, Input, OnChanges } from '@angular/core';
 import { IProduct } from 'src/app/Models/iproduct';
 
 @Component({
@@ -7,25 +6,25 @@ import { IProduct } from 'src/app/Models/iproduct';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnChanges{
 
   productList:IProduct[];
-  categoryList:ICategory[];
   productListByCategory:IProduct[];
 
-  getProductsByCategoryId(categoryId:number):void
+  @Input() recievedSelectedCatId:number=0;
+
+  getProductsByCategoryId():void
   {
-     this.productListByCategory = this.productList.filter(x=>x.categoryId == categoryId);
+    if(this.recievedSelectedCatId ==0)
+    {
+      this.productListByCategory = this.productList;
+    }
+    else
+     this.productListByCategory = this.productList.filter(x=>x.categoryId == this.recievedSelectedCatId);
   }
 
-
-
   constructor() {
-    this.categoryList = 
-    [
-      {id:1,name:"labtop"},
-      {id:2,name:"mobile"}
-    ];
+   
     this.productList = 
     [
       {
@@ -45,5 +44,8 @@ export class ProductsComponent {
 
   }
 
+  ngOnChanges(): void {
+    this.getProductsByCategoryId();
+  }
 
 }
