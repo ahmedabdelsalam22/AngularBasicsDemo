@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICategory } from 'src/app/Models/icategory';
 import { IProduct } from 'src/app/Models/iproduct';
 
 @Component({
@@ -9,8 +10,22 @@ import { IProduct } from 'src/app/Models/iproduct';
 export class ProductsComponent {
 
   productList:IProduct[];
+  categoryList:ICategory[];
+  productListByCategory:IProduct[];
+
+  getProductsByCategoryId(categoryId:number):void
+  {
+     this.productListByCategory = this.productList.filter(x=>x.categoryId == categoryId);
+  }
+
+
 
   constructor() {
+    this.categoryList = 
+    [
+      {id:1,name:"labtop"},
+      {id:2,name:"mobile"}
+    ];
     this.productList = 
     [
       {
@@ -26,7 +41,9 @@ export class ProductsComponent {
         quantity:0,imgUrl:'https://www.xtsmart.vn/vnt_upload/product/09_2021/thumbs/(600x600)_crop_iphone_13_pro_max.png',categoryId:2
       }
     ];
-    
+    this.productListByCategory = this.productList;
+
   }
+
 
 }
