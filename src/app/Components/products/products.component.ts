@@ -11,6 +11,14 @@ export class ProductsComponent {
 
   productList:IProduct[];
   categoryList:ICategory[];
+  productListByCategory:IProduct[];
+
+  getProductsByCategoryId(categoryId:number):void
+  {
+     this.productListByCategory = this.productList.filter(x=>x.categoryId == categoryId);
+  }
+
+
 
   constructor() {
     this.categoryList = 
@@ -33,7 +41,9 @@ export class ProductsComponent {
         quantity:0,imgUrl:'https://www.xtsmart.vn/vnt_upload/product/09_2021/thumbs/(600x600)_crop_iphone_13_pro_max.png',categoryId:2
       }
     ];
+    this.productListByCategory = this.productList;
 
   }
+
 
 }
